@@ -35,8 +35,7 @@ SyntaxHighlighter.registerLanguage("json", json);
 
 export const revalidate = 3600;
 
-const getPost = async (slug: string) => {
-  const id = slug.slice(slug.length - 10);
+const getPost = async (id: string) => {
   const post = await fetch(`${process.env.MAIN_URI}/api/posts/${id}`);
   return post;
 };
@@ -44,7 +43,7 @@ const getPost = async (slug: string) => {
 const PostPage = async ({ params }: { params: { slug: string[] } }) => {
   const { slug: slugArr } = params;
   const [slug] = slugArr;
-  const data = await getPost(slug);
+  const data = await getPost(slug.slice(slug.length - 10));
   const { post } = await data.json();
 
   const MarkdownComponents: object = {

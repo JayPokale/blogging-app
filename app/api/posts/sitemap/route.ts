@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   try {
     await connectMongo();
     const posts = await Post.find({}).select(
-      "-_id -__v -title -content -thumbnail -author -createdAt"
+      "-_id -__v -content -thumbnail -author -createdAt"
     );
     return NextResponse.json({ posts });
   } catch (error) {

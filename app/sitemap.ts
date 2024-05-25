@@ -13,7 +13,9 @@ export default async function sitemap() {
   }
 
   const posts = data.map((post: any) => ({
-    url: `${uri}/blog/${post.postId}`,
+    url: `${uri}/blog/${post.postId}/${post.title
+      .toLowerCase()
+      .replaceAll(" ", "-")}`,
     lastModified: new Date(post.updatedAt),
     changeFrequency: "monthly",
     priority: 0.5,
